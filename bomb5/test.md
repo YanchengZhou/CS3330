@@ -2,7 +2,7 @@
 
 ## Prerequisite Package & Settings
 
-1. **Windows Powershell:**
+1. **Windows Powershell:** <br>
 In desktop search bar, input "Windows Powershell" and run as administrator
 2. **Clone Repo:**
 ```
@@ -10,7 +10,7 @@ git clone https://github.com/project-chip/zap
 ```
 If having file permission issue, clone it under \Users\<user_name> directory, do not put it under Desktop
 
-3. **Chocolatey:**
+3. **Chocolatey:** <br>
 install from https://chocolatey.org/install
 check if installed properly:
 ```
@@ -32,7 +32,7 @@ choco install nodejs-lts
 
 ### Run ZAP App
 
-1. **Install node modules:**
+1. **Install node modules:** <br>
 ```npm install```
 *sometimes it might help to run:
 
@@ -74,13 +74,13 @@ npm run test
 ### Fix Failed Tests
 
 
-1. **Exceed Timeout**
+1. **Exceed Timeout** <br>
 If fails due to "thrown: "Exceeded timeout of 1500 ms for a test. Use jest.setTimeout(newTimeout) to increase the timeout value, if this is a long-running test."", set environment variables to make test time allowed longer
 ```
 $env:ZAP_TEST_TIMEOUT = 50000000; $env:ZAP_TEST_TIMEOUT_SHORT = 50000000; $env:ZAP_TEST_TIMEOUT_MEDIUM = 50000000; $env:ZAP_TEST_TIMEOUT_LONG = 50000000
 ```
 
-2. **Test Suite failed to run (Canvas not found)**
+2. **Test Suite failed to run (Canvas not found)** <br>
 If fails due to "Test suite failed to run Cannot find module '../build/Release/canvas.node'" or "\zap\node_modules\canvas\build\Release\canvas.node is not a valid Win32 application.", rebuild canvas:
 ```
 npm rebuild canvas --update-binary
@@ -92,7 +92,7 @@ npm run report
 If fails due to "cp" or "mv" or "mkdir -p" when executing the above command, which is part of 'npm run test', it is because they are supposed to be Linux commands and does not compile in Windows.
 Currently we delete the command to exclude it from 'npm run test' to remove failure → **might need to be fixed**
 
-4. **get index.html or other server issue**
+4. **get index.html or other server issue** <br>
 If fails due to “get index.html Request failed with status code 404”, run:
 ```
 npm run build
@@ -100,12 +100,12 @@ npm run build
 and then run test again
 *this command might also solve server issues in CI tests
 
-5. **Generation Output Inconsistency**
+5. **Generation Output Inconsistency** <br>
 If fails due to “Validate base generation” or “Testing zap command parser generation”, it is because the output format is inconsistent with expected due to some format error, not a real bug, currently fixed by cleaning string up before comparing like below
 ```
 receivedString = receivedString.split('\n').map(s => s.trim()).join('\n');
 ```
 
-6. **Other**
+6. **Other** <br>
 Check if node version is v18, and try to install it with Chocolatey
 Also, you can Check doc/faq.md for help
